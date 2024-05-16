@@ -21,9 +21,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import isAuth from "@/context/isAuth";
 import { baseURL } from "@/api/api";
+import { useAuth } from "@/context/Auth";
 
 const Register = () => {
   const router = useRouter();
+  const { setUserAuthInfo } = useAuth();
   const [userData, setUserData] = useState<RegisterForm>({
     username: "",
     email: "",
@@ -46,8 +48,9 @@ const Register = () => {
         email: userData.email,
         password: userData.password,
       });
+      setUserAuthInfo(response.data);
       toast.success(response.data.message);
-      router.push("/login");
+      router.push("/");
     } catch (err: any) {
       toast.error(err.response.data.message);
       console.log("Error", err);

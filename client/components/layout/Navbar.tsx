@@ -14,13 +14,30 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import api from "@/api/api";
+import { toast } from "sonner";
 
 const Navbar = () => {
+  const router = useRouter();
   const { authState: user } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [toggle, setToggle] = useState(false);
   const pathname = usePathname();
+
+  const handleLogout = async () => {
+    try {
+      const response = await api.post("/logout");
+      console.log(response);
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      toast.success(response.data.success);
+      router.push("/login");
+    } catch (err: any) {
+      toast.error(err.response.data.error);
+      console.log("Error: ", err);
+    }
+  };
 
   return (
     <div className="flex justify-between items-center p-4 md:p-10 shadow-md h-[60px] w-full">
@@ -82,7 +99,10 @@ const Navbar = () => {
               </div>
               <div className="flex justify-between items-center">
                 <div className="">Logout</div>
-                <IoLogOutOutline className="h-6 w-6 text-red-500" />
+                <IoLogOutOutline
+                  onClick={handleLogout}
+                  className="h-6 w-6 text-red-500"
+                />
               </div>
             </div>
           </PopoverContent>

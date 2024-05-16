@@ -36,12 +36,12 @@ const Login = () => {
     const password = userData.password;
 
     if (!email || !password) {
-      toast.error("All fields required");
+      toast.error("All fields required!");
       return;
     }
 
     try {
-      const response = await axios.post(`${baseURL}/signin`, {
+      const response = await axios.post(`${baseURL}/login`, {
         email: userData.email,
         password: userData.password,
       });
@@ -75,7 +75,8 @@ const Login = () => {
                       id="name"
                       type="email"
                       placeholder="Email Address"
-                      className="mt-2 border rounded-xl text-[#333333]"
+                      className="mt-2 border rounded-xl border-zinc-400 text-[#333333]
+                      placeholder:text-zinc-400 focus:border-[#4B6BFB] focus:ring-[#4B6BFB] "
                       value={userData.email}
                       onChange={(e) =>
                         setUserData({ ...userData, email: e.target.value })
@@ -88,7 +89,8 @@ const Login = () => {
                       id="name"
                       type="password"
                       placeholder="Password"
-                      className="mt-2 border rounded-xl text-[#333333]"
+                      className="mt-2 border rounded-xl border-zinc-400 text-[#333333]
+                      placeholder:text-zinc-400 focus:border-[#4B6BFB] focus:ring-[#4B6BFB] "
                       value={userData.password}
                       onChange={(e) =>
                         setUserData({ ...userData, password: e.target.value })

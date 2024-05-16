@@ -9,7 +9,7 @@ export type RegisterForm = {
   password: string;
 };
 export type UserData = {
-  user_id: number | null;
+  id: number | null;
   username: string | null;
   email: string | null;
 };
@@ -19,14 +19,12 @@ export type UserCredential = {
   user: UserData;
 };
 
-export type NoteData = {
-  username: string;
-  is_admin: boolean;
-  note_id: number;
-  fk_user: number;
+export type BlogData = {
+  id: number;
   title: string;
+  username: string;
+  email: string;
   content: string;
-  privacy: string;
   created_at: string;
   updated_at: string;
 };

@@ -24,7 +24,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [authState, setAuthState] = useState<UserCredential>({
     token: "",
     user: {
-      user_id: 0,
+      id: 0,
       username: "",
       email: "",
     },

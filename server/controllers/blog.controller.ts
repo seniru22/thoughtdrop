@@ -39,6 +39,27 @@ const getAllBlogs = async (req: ReqMid, res: any) => {
   }
 };
 
+const getUserPosts = async (req: ReqMid, res: any) => {
+  try {
+    const userId = req.user.id;
+    const selectQuery: string = `SELECT b.*, u.username, u.email FROM blogs AS b LEFT JOIN users AS u ON u.id=b.author_id WHERE author_id = $1`;
+    const params: any[] = [userId];
+    const result: QueryResult<any> = await client.query(selectQuery, params);
+    return res
+      .status(200)
+      .json({
+        status: true,
+        data: result.rows,
+        message: "Blogs fetched successfully",
+      });
+  } catch (error: any) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ status: false, message: "Internal server error" });
+  }
+};
+
 const getAuthorPosts = async (req: ReqMid, res: any) => {
   try {
     const authorId = req.query.author;
@@ -60,4 +81,4 @@ const getAuthorPosts = async (req: ReqMid, res: any) => {
   }
 };
 
-module.exports = { createBlog, getAllBlogs, getAuthorPosts };
+module.exports = { createBlog, getAllBlogs, getUserPosts, getAuthorPosts };

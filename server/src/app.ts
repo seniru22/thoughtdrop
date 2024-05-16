@@ -1,6 +1,9 @@
 import express, { Request, Response, Application, urlencoded } from "express";
 
+const cors = require("cors");
+
 const app: Application = express();
+app.use(cors());
 app.use(urlencoded({ extended: true }));
 app.use(express.json());
 
