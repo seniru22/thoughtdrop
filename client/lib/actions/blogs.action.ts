@@ -29,3 +29,26 @@ export const getUserBlogsData = async (token: string | undefined) => {
     return [];
   }
 };
+
+export const getAuthorBlogs = async ({
+  authorId,
+  token,
+}: {
+  authorId: string;
+  token: string | undefined;
+}) => {
+  try {
+    const response = await axios.get(
+      `${baseURL}/posts/author?author=${authorId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data.data;
+  } catch (err: any) {
+    console.log("Error: ", err);
+    return [];
+  }
+};

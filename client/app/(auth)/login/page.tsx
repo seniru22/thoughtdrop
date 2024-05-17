@@ -5,6 +5,7 @@ import { useState } from "react";
 import { LoginForm } from "@/type";
 import { baseURL } from "@/api/api";
 import { useAuth } from "@/context/Auth";
+import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
@@ -22,7 +23,6 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { setCookie } from "cookies-next";
 
 const Login = () => {
   const router = useRouter();

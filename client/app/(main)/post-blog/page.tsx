@@ -3,7 +3,7 @@
 import api from "@/api/api";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -13,6 +13,7 @@ const Blog = () => {
   const auth =
     typeof window !== "undefined" ? !!localStorage.getItem("token") : "";
 
+  const router = useRouter();
   const [blogData, setBlogData] = useState({
     title: "",
     content: "",
@@ -20,9 +21,9 @@ const Blog = () => {
 
   useEffect(() => {
     if (!auth) {
-      redirect("/login");
+      router.push("/login");
     }
-  }, [auth]);
+  }, [auth, router]);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -35,7 +36,7 @@ const Blog = () => {
     try {
       const response = await api.post("/post", blogData);
       toast.success(response.data.message);
-      redirect("/");
+      router.push("/");
     } catch (err: any) {
       console.log("Error:", err);
     }

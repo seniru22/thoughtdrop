@@ -1,12 +1,14 @@
 "use client";
 
-import BlogCard from "@/components/BlogCard";
-import { BlogData } from "@/type";
-import { redirect } from "next/navigation";
-import { Card, CardContent } from "@/components/ui/card";
-import { useEffect, useState } from "react";
-import api from "@/api/api";
 import { toast } from "sonner";
+import { BlogData } from "@/type";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Card, CardContent } from "@/components/ui/card";
+import api from "@/api/api";
+import BlogCard from "@/components/BlogCard";
+
+// components
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,6 +17,7 @@ const Dashboard = () => {
   const auth =
     typeof window !== "undefined" ? !!localStorage.getItem("token") : "";
 
+  const router = useRouter();
   const [userBlogsData, setUserBlogsData] = useState<BlogData[]>([]);
   const [blogData, setBlogData] = useState({
     title: "",
@@ -23,9 +26,9 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!auth) {
-      redirect("/login");
+      router.push("/login");
     }
-  }, [auth]);
+  }, [auth, router]);
 
   const getUserBlogs = async () => {
     try {
@@ -51,7 +54,7 @@ const Dashboard = () => {
     try {
       const response = await api.post("/post", blogData);
       toast.success(response.data.message);
-      redirect("/");
+      router.push("/");
     } catch (err: any) {
       console.log("Error:", err);
     }

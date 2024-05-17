@@ -2,10 +2,14 @@
 
 import { toast } from "sonner";
 import { useState } from "react";
+import { baseURL } from "@/api/api";
 import { RegisterForm } from "@/type";
+import { useAuth } from "@/context/Auth";
+import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
+import isAuth from "@/context/isAuth";
 
 // ui components
 import {
@@ -19,10 +23,6 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import isAuth from "@/context/isAuth";
-import { baseURL } from "@/api/api";
-import { useAuth } from "@/context/Auth";
-import { setCookie } from "cookies-next";
 
 const Register = () => {
   const router = useRouter();

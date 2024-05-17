@@ -1,11 +1,10 @@
-import BlogCard from "@/components/BlogCard";
 import { BlogData } from "@/type";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getBlogsData } from "@/lib/actions/blogs.action";
+import BlogCard from "@/components/BlogCard";
 
 export default async function Home() {
-
   const cookieStore = cookies();
   const token: string | undefined = cookieStore.get("token")?.value;
 
