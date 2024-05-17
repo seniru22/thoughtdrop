@@ -34,9 +34,7 @@ const Register = () => {
   });
 
   const handleSubmit = async () => {
-    const username = userData.username;
-    const email = userData.email;
-    const password = userData.password;
+    const { username, email, password } = userData;
 
     if (!username || !email || !password) {
       toast.error("All fields required");
@@ -45,9 +43,9 @@ const Register = () => {
 
     try {
       const response = await axios.post(`${baseURL}/signup`, {
-        username: userData.username,
-        email: userData.email,
-        password: userData.password,
+        username,
+        email,
+        password,
       });
       setUserAuthInfo(response.data);
 

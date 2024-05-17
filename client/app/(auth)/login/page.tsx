@@ -51,7 +51,7 @@ const Login = () => {
       setCookie("token", token, { maxAge: 60 * 60 * 24 });
 
       toast.success(response.data.message);
-      
+
       router.push("/");
     } catch (err: any) {
       toast.error(err.response.data.message);
@@ -122,7 +122,7 @@ const Login = () => {
             <p className="text-xs text-[#4B6BFB]">
               Don&apos;t have an account?{" "}
               <span className="">
-                <Link href="/register">Register</Link>
+                <Link href="/signup">Register</Link>
               </span>
             </p>
           </CardFooter>

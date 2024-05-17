@@ -14,7 +14,7 @@ export default function MainLayout({
       <body className={inter.className}>
         <main className="">
           <Navbar />
-          <div className="">{children}</div>
+          <div className="h-screen">{children}</div>
         </main>
       </body>
     </html>

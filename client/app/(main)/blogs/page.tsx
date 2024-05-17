@@ -7,11 +7,11 @@ import { redirect, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const AuthorBlogs = () => {
-
-    const auth = typeof window !== "undefined" ? !!localStorage.getItem("token") : "";
-    if(!auth){
-        redirect("/login");
-    }
+  const auth =
+    typeof window !== "undefined" ? !!localStorage.getItem("token") : "";
+  if (!auth) {
+    redirect("/login");
+  }
 
   const [blogsData, setBlogsData] = useState<BlogData[]>([]);
   const searchParams = useSearchParams();
@@ -31,11 +31,11 @@ const AuthorBlogs = () => {
   }, [authorId]);
 
   return (
-    <main className="mx-[2rem] md:mx-[10rem]">
+    <main className="mx-[2rem] lg:mx-[10rem]">
       <div className="text-[#333333] text-[2rem] font-bold py-10">
-        Blogs by {authorId}
+        Blogs with author id {authorId}
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {blogsData.length > 0 ? (
           blogsData.map((blog) => <BlogCard key={blog.id} blog={blog} />)
         ) : (

@@ -3,18 +3,18 @@
 import api from "@/api/api";
 import { toast } from "sonner";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 
 const Blog = () => {
-  const router = useRouter();
 
-  const auth = typeof window !== "undefined" ? !!localStorage.getItem("token") : "";
-  if(!auth){
-    router.push("/login");
+  const auth =
+    typeof window !== "undefined" ? !!localStorage.getItem("token") : "";
+  if (!auth) {
+    redirect("/login");
     return;
   }
 
@@ -34,7 +34,7 @@ const Blog = () => {
     try {
       const response = await api.post("/post", blogData);
       toast.success(response.data.message);
-      router.push("/");
+      redirect("/");
     } catch (err: any) {
       console.log("Error:", err);
     }

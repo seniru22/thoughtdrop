@@ -33,7 +33,7 @@ const Navbar = () => {
       const response = await api.post("/logout");
       localStorage.removeItem("user");
       localStorage.removeItem("token");
-      
+
       deleteCookie("token");
       toast.success(response.data.success);
       router.push("/login");
@@ -51,10 +51,13 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center p-4 md:p-10 shadow-md h-[60px] w-full">
       <div className="flex justify-center items-center gap-10">
-        <div onClick={() => router.push("/")} className="hover:cursor-pointer text-[#4B6BFB] text-lg md:text-3xl font-semibold">
+        <div
+          onClick={() => router.push("/")}
+          className="hover:cursor-pointer text-[#4B6BFB] text-lg md:text-3xl font-semibold"
+        >
           BlogPlatform
         </div>
-        <div className="relative hidden md:flex">
+        <div className="relative hidden lg:flex">
           <input
             type="text"
             placeholder="Search by author id"
@@ -69,7 +72,7 @@ const Navbar = () => {
           />
         </div>
       </div>
-      <div className="md:flex hidden justify-center items-center gap-10 text-[#333333]">
+      <div className="lg:flex hidden justify-center items-center gap-10 text-[#333333]">
         <Link
           href="/"
           className={`hover:text-[#4B6BFB] ${
@@ -134,7 +137,7 @@ const Navbar = () => {
       </div>
       {/* <div className="hidden md:flex justify-center items-center gap-4">
       </div> */}
-      <div className="md:hidden flex items-center">
+      <div className="lg:hidden flex items-center">
         <button onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? (
             <IoCloseOutline className="h-6 w-6" />
@@ -144,7 +147,7 @@ const Navbar = () => {
         </button>
       </div>
       {isOpen && (
-        <div className="md:hidden absolute top-[60px] left-0 right-0 bg-white shadow-md flex flex-col space-y-4 items-center py-4">
+        <div className="lg:hidden absolute top-[60px] left-0 right-0 bg-white shadow-md flex flex-col space-y-4 items-center py-4">
           <div className="relative">
             <input
               type="text"
