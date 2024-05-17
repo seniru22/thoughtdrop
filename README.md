@@ -1,6 +1,6 @@
 ﻿# Blog Platform
 
-**Blog platform** is a personal platform where **users** can sign up, log in, and **post blogs**. The platform allow users to view all posts and filter/search them by author ID. 
+**Blog platform** is a personal platform where **users** can sign up, log in, and **post blogs**. The platform allow users to view all posts and filter/search specific author's blog by author ID. 
 
 # Description
 
@@ -12,7 +12,7 @@ In this platform, **users** can **create** and view **blogs**. The platform also
 2. **User Login**: Existing users can log in to their account using their **email** and **password**.
 3. **Data fetching**: Data is fetched on the **homepage** and **search author page** using **server-side rendering**.
 4. **Blog Viewing**: Users can view all blogs on the **homepage** and their **personal blogs** on **dashboard**.
-5. **Blog Filtering/Searching**: Users can **filter/search** blogs by **author ID**.
+5. **Blog Filtering/Searching**: Users can **filter/search** **specific author's blog** by **author ID**.
 6. **Protected Routes**: Only logged-in users can access the **homepage**, **dashboard** and **create blogs**.
 
 # View website
