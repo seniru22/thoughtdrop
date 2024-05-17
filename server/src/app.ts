@@ -3,7 +3,15 @@ import express, { Request, Response, Application, urlencoded } from "express";
 const cors = require("cors");
 
 const app: Application = express();
-app.use(cors());
+const corsOptions = {
+    origin: [
+      "http://localhost:3000",
+    ],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+    optionsSuccessStatus: 204,
+  };
+  app.use(cors(corsOptions));
 app.use(urlencoded({ extended: true }));
 app.use(express.json());
 
