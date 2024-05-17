@@ -31,14 +31,17 @@ const BlogCard = ({ blog }: BlogDataProps) => {
               ? blog.title.slice(0, 30) + "..."
               : blog.title}
           </CardTitle>
-          <CardDescription className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
-            <LuUser2 className="w-4 h-4 mr-1" />
-            <span>{blog.username}</span>
-            <span className="mx-2">·</span>
-            <span>{convertDate(blog.created_at)}</span>
+          <CardDescription className="flex flex-col items-start text-sm text-gray-500 dark:text-gray-400 space-y-2 mb-4">
+            <div className="flex justify-center items-center">
+              <LuUser2 className="w-4 h-4 mr-1" />
+              <span>{blog.username}</span>
+              <span className="mx-2">·</span>
+              <span>{convertDate(blog.created_at)}</span>
+            </div>
+            <div className="text-gray-500">Author Id: {blog.author_id}</div>
           </CardDescription>
           <CardContent className="text-[#333333] pl-0">
-          {blog.content.length > 200
+            {blog.content.length > 200
               ? blog.content.slice(0, 149) + "..."
               : blog.content}
           </CardContent>

@@ -21,6 +21,7 @@ export type UserCredential = {
 
 export type BlogData = {
   id: number;
+  author_id: number;
   title: string;
   username: string;
   email: string;
