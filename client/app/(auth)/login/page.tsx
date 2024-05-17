@@ -22,6 +22,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { setCookie } from "cookies-next";
 
 const Login = () => {
   const router = useRouter();
@@ -32,8 +33,7 @@ const Login = () => {
   });
 
   const handleSubmit = async () => {
-    const email = userData.email;
-    const password = userData.password;
+    const { email, password } = userData;
 
     if (!email || !password) {
       toast.error("All fields required!");
@@ -42,11 +42,16 @@ const Login = () => {
 
     try {
       const response = await axios.post(`${baseURL}/login`, {
-        email: userData.email,
-        password: userData.password,
+        email,
+        password,
       });
-      toast.success(response.data.message);
       setUserAuthInfo(response.data);
+
+      const token = response.data.token;
+      setCookie("token", token, { maxAge: 60 * 60 * 24 });
+
+      toast.success(response.data.message);
+      
       router.push("/");
     } catch (err: any) {
       toast.error(err.response.data.message);
@@ -59,7 +64,9 @@ const Login = () => {
       <Card className="bg-[#fff] w-3/4 sm:w-1/3 py-2 lg:py-4 rounded-xl text-white border shadow-md flex justify-center items-center">
         <div className="">
           <CardHeader className="lg:mb-5 flex justify-center items-center ">
-            <CardTitle className="mb-2 text-[#4B6BFB] font-semibold">Login</CardTitle>
+            <CardTitle className="mb-2 text-[#4B6BFB] font-semibold">
+              Login
+            </CardTitle>
             <CardDescription className="text-sm text-center text-[#4B6BFB]">
               Welcome back to{" "}
               <span className="font-semibold">Blog Platform</span>!
@@ -70,7 +77,9 @@ const Login = () => {
               <div className="lg:w-[25rem] grid items-center gap-4">
                 <div className="flex flex-col space-y-2">
                   <div className="">
-                    <Label htmlFor="name" className="text-[#4B6BFB]">Email Address</Label>
+                    <Label htmlFor="name" className="text-[#4B6BFB]">
+                      Email Address
+                    </Label>
                     <Input
                       id="name"
                       type="email"
@@ -84,7 +93,9 @@ const Login = () => {
                     />
                   </div>
                   <div className="">
-                    <Label htmlFor="name" className="text-[#4B6BFB]">Password</Label>
+                    <Label htmlFor="name" className="text-[#4B6BFB]">
+                      Password
+                    </Label>
                     <Input
                       id="name"
                       type="password"

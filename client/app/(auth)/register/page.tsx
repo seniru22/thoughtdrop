@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import isAuth from "@/context/isAuth";
 import { baseURL } from "@/api/api";
 import { useAuth } from "@/context/Auth";
+import { setCookie } from "cookies-next";
 
 const Register = () => {
   const router = useRouter();
@@ -49,6 +50,10 @@ const Register = () => {
         password: userData.password,
       });
       setUserAuthInfo(response.data);
+
+      const token = response.data.token;
+      setCookie("token", token, { maxAge: 60 * 60 * 24 });
+
       toast.success(response.data.message);
       router.push("/");
     } catch (err: any) {
@@ -62,7 +67,9 @@ const Register = () => {
       <Card className="w-3/4 sm:w-1/3 py-2 lg:py-4 rounded-xl bg-[#fff] text-[#333333] border border-[#e1e7ff] flex justify-center items-center">
         <div className="">
           <CardHeader className="mb-5 flex justify-center items-center ">
-            <CardTitle className="mb-2 text-[#4B6BFB] font-semibold">Register</CardTitle>
+            <CardTitle className="mb-2 text-[#4B6BFB] font-semibold">
+              Register
+            </CardTitle>
             <CardDescription className="text-sm text-center text-[#4B6BFB]">
               Create an Account to prepare{" "}
               <span className="font-semibold">Blogs</span>!
@@ -73,12 +80,15 @@ const Register = () => {
               <div className="lg:w-[25rem] grid w-full items-center gap-4">
                 <div className="flex flex-col space-y-4">
                   <div className="">
-                    <Label htmlFor="name">Username</Label>
+                    <Label htmlFor="name" className="text-[#4B6BFB]">
+                      Username
+                    </Label>
                     <Input
                       id="username"
                       type="text"
                       placeholder="Enter Username"
-                      className="mt-2 border rounded-xl text-[#333333]"
+                      className="mt-2 border rounded-xl border-zinc-400 text-[#333333]
+                      placeholder:text-zinc-400 focus:border-[#4B6BFB] focus:ring-[#4B6BFB] "
                       value={userData.username}
                       onChange={(e) =>
                         setUserData({ ...userData, username: e.target.value })
@@ -86,12 +96,15 @@ const Register = () => {
                     />
                   </div>{" "}
                   <div className="">
-                    <Label htmlFor="name">Email Address</Label>
+                    <Label htmlFor="name" className="text-[#4B6BFB]">
+                      Email Address
+                    </Label>
                     <Input
                       id="name"
                       type="email"
                       placeholder="Email Address"
-                      className="mt-2 border rounded-xl text-[#333333]"
+                      className="mt-2 border rounded-xl border-zinc-400 text-[#333333]
+                      placeholder:text-zinc-400 focus:border-[#4B6BFB] focus:ring-[#4B6BFB] "
                       value={userData.email}
                       onChange={(e) =>
                         setUserData({ ...userData, email: e.target.value })
@@ -99,12 +112,15 @@ const Register = () => {
                     />
                   </div>
                   <div className="">
-                    <Label htmlFor="name">Password</Label>
+                    <Label htmlFor="name" className="text-[#4B6BFB]">
+                      Password
+                    </Label>
                     <Input
                       id="name"
                       type="password"
                       placeholder="Password"
-                      className="mt-2 border rounded-xl text-[#333333]"
+                      className="mt-2 border rounded-xl border-zinc-400 text-[#333333]
+                      placeholder:text-zinc-400 focus:border-[#4B6BFB] focus:ring-[#4B6BFB] "
                       value={userData.password}
                       onChange={(e) =>
                         setUserData({ ...userData, password: e.target.value })

@@ -1,26 +1,12 @@
-"use client";
-
-import api from "@/api/api";
 import BlogCard from "@/components/BlogCard";
 import { BlogData } from "@/type";
-import isNotAuth from "@/context/isNotAuth";
-import { useEffect, useState } from "react";
+import { cookies } from "next/headers";
+import { getBlogsData } from "@/lib/actions/blogs.action";
 
-const Home = () => {
-  const [blogsData, setBlogsData] = useState<BlogData[]>([]);
-
-  const getBlogsData = async () => {
-    try {
-      const response = await api.get("/blogs");
-      setBlogsData(response.data.data);
-    } catch (err) {
-      console.log("Error: ", err);
-    }
-  };
-
-  useEffect(() => {
-    getBlogsData();
-  }, []);
+export default async function Home() {
+  const cookieStore = cookies();
+  const token: string | undefined = cookieStore.get("token")?.value;
+  const blogsData: BlogData[] = await getBlogsData(token);
 
   return (
     <main className="mx-[2rem] md:mx-[10rem]">
@@ -38,6 +24,4 @@ const Home = () => {
       </div>
     </main>
   );
-};
-
-export default isNotAuth(Home);
+}

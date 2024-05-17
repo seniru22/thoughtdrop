@@ -17,10 +17,12 @@ import {
 import { usePathname, useRouter } from "next/navigation";
 import api from "@/api/api";
 import { toast } from "sonner";
+import { FaSearch } from "react-icons/fa";
 
 const Navbar = () => {
   const router = useRouter();
   const { authState: user } = useAuth();
+  const [search, setSearch] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [toggle, setToggle] = useState(false);
   const pathname = usePathname();
@@ -39,10 +41,31 @@ const Navbar = () => {
     }
   };
 
+  const handleSearchClick = () => {
+    router.push(`/blogs?author=${search}`);
+    setSearch("");
+  };
+
   return (
     <div className="flex justify-between items-center p-4 md:p-10 shadow-md h-[60px] w-full">
-      <div className="text-[#4B6BFB] text-lg md:text-3xl font-semibold">
-        BlogPlatform
+      <div className="flex justify-center items-center gap-10">
+        <div onClick={() => router.push("/")} className="hover:cursor-pointer text-[#4B6BFB] text-lg md:text-3xl font-semibold">
+          BlogPlatform
+        </div>
+        <div className="relative hidden md:flex">
+          <input
+            type="text"
+            placeholder="Search by author id"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-10 pr-3 py-2 placeholder:text-sm rounded-full border 
+            focus:outline-none focus:border-[#4B6BFB]"
+          />
+          <FaSearch
+            onClick={handleSearchClick}
+            className="hover:cursor-pointer absolute left-3 top-1/2 transform -translate-y-1/2 text-[#4B6BFB]"
+          />
+        </div>
       </div>
       <div className="md:flex hidden justify-center items-center gap-10 text-[#333333]">
         <Link
@@ -62,15 +85,14 @@ const Navbar = () => {
           Dashboard
         </Link>
         <Link
-          href="/blog"
+          href="/post-blog"
           className={`hover:text-[#4B6BFB] ${
-            pathname === "/blog" && "text-[#4B6BFB]"
+            pathname === "/create-blog" && "text-[#4B6BFB]"
           }`}
         >
           Blog
         </Link>
-      </div>
-      <div className="hidden md:flex justify-center items-center gap-4">
+
         <Popover>
           <PopoverTrigger asChild>
             <div
@@ -101,13 +123,15 @@ const Navbar = () => {
                 <div className="">Logout</div>
                 <IoLogOutOutline
                   onClick={handleLogout}
-                  className="h-6 w-6 text-red-500"
+                  className="h-6 w-6 text-red-500 hover:cursor-pointer"
                 />
               </div>
             </div>
           </PopoverContent>
         </Popover>
       </div>
+      {/* <div className="hidden md:flex justify-center items-center gap-4">
+      </div> */}
       <div className="md:hidden flex items-center">
         <button onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? (
@@ -118,7 +142,21 @@ const Navbar = () => {
         </button>
       </div>
       {isOpen && (
-        <div className="absolute top-[60px] left-0 right-0 bg-white shadow-md flex flex-col space-y-4 items-center py-4">
+        <div className="md:hidden absolute top-[60px] left-0 right-0 bg-white shadow-md flex flex-col space-y-4 items-center py-4">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search by author id"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="pl-10 pr-3 py-2 rounded-full border 
+            focus:outline-none focus:border-[#4B6BFB]"
+            />
+            <FaSearch
+              onClick={handleSearchClick}
+              className="hover:cursor-pointer absolute left-3 top-1/2 transform -translate-y-1/2 text-[#4B6BFB]"
+            />
+          </div>
           <Link
             href="/"
             className={`hover:text-[#4B6BFB] ${
@@ -136,9 +174,9 @@ const Navbar = () => {
             Dashboard
           </Link>
           <Link
-            href="/blog"
+            href="/post-blog"
             className={`hover:text-[#4B6BFB] ${
-              pathname === "/blog" && "text-[#4B6BFB]"
+              pathname === "/create-blog" && "text-[#4B6BFB]"
             }`}
           >
             Blog
@@ -171,7 +209,10 @@ const Navbar = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <div className="">Logout</div>
-                  <IoLogOutOutline className="h-6 w-6 text-red-500" />
+                  <IoLogOutOutline
+                    onClick={handleLogout}
+                    className="h-6 w-6 text-red-500"
+                  />
                 </div>
               </div>
             </PopoverContent>

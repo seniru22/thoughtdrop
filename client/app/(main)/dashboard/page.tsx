@@ -1,43 +1,35 @@
-"use client";
-
-import api from "@/api/api";
 import BlogCard from "@/components/BlogCard";
-import isNotAuth from "@/context/isNotAuth";
 import { BlogData } from "@/type";
-import { useEffect, useState } from "react";
+import { cookies } from "next/headers";
+import { getUserBlogsData } from "@/lib/actions/blogs.action";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 
-const Dashboard = () => {
-  const [userBlogsData, setUserBlogsData] = useState<BlogData[]>([]);
-
-  const getUserBlogsData = async () => {
-    try {
-      const response = await api.get("/blogs");
-      setUserBlogsData(response.data.data);
-    } catch (err) {
-      console.log("Error: ", err);
-    }
-  };
-
-  useEffect(() => {
-    getUserBlogsData();
-  }, []);
+const Dashboard = async () => {
+  const cookieStore = cookies();
+  const token: string | undefined = cookieStore.get("token")?.value;
+  const userBlogsData: BlogData[] = await getUserBlogsData(token);
 
   return (
-    <main className="mx-[10rem]">
-      <div className="text-[#333333] text-[2rem] font-bold py-10">
-        My Blogs
+    <main className="flex flex-col md:flex-row justify-center items-center gap-10">
+      <div className="w-[90%] px-[2rem] md:px-[10rem]">
+        <div className="text-[#333333] text-[2rem] font-bold py-10">
+          Personal Blogs
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {userBlogsData.length > 0 ? (
+            userBlogsData.map((blog) => <BlogCard key={blog.id} blog={blog} />)
+          ) : (
+            <div className="text-[#333333] text-[1rem] font-medium">
+              No personal blogs found
+            </div>
+          )}
+        </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {userBlogsData.length > 0 ? (
-          userBlogsData.map((blog) => <BlogCard key={blog.id} blog={blog} />)
-        ) : (
-          <div className="text-[#333333] text-[1rem] font-medium">
-            No blogs found
-          </div>
-        )}
+      <div className="w-[30%] pr-[2rem] md:pr-[10rem]">
+        {/* <PostBlogCard /> */}
       </div>
     </main>
   );
 };
 
-export default isNotAuth(Dashboard);
+export default Dashboard;

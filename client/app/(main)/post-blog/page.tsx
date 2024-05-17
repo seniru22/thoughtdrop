@@ -19,8 +19,13 @@ const Blog = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
+    if (!blogData.title || !blogData.content) {
+      toast.error("All fields are required");
+      return;
+    }
+
     try {
-      const response = await api.post("/blog", blogData);
+      const response = await api.post("/post", blogData);
       toast.success(response.data.message);
       router.push("/");
     } catch (err: any) {
@@ -31,7 +36,7 @@ const Blog = () => {
   return (
     <div className="">
       <div className="flex justify-center items-center my-5 md:my-10 text-2xl font-bold text-[#333333] dark:text-gray-200">
-        Public Blog
+        Publish Blog
       </div>
       <div className="flex justify-center items-center dark:bg-[#333333]">
         <Card className="md:w-full max-w-3xl bg-white dark:bg-[#333333] rounded-xl shadow-xl p-4 md:p-8">

@@ -4,10 +4,10 @@ const { isAuthenticated } = require("../middlewares/user.middleware");
 
 const router: Router = express.Router();
 
-router.post('/blog', isAuthenticated, createBlog);
-router.get('/blogs', isAuthenticated, getAllBlogs);
-router.get('/blogs/user', isAuthenticated, getUserPosts);
-router.get('/blogs/author', isAuthenticated, getAuthorPosts);
+router.post('/post', isAuthenticated, createBlog);
+router.get('/posts', isAuthenticated, getAllBlogs);
+router.get('/posts/user', isAuthenticated, getUserPosts);
+router.get('/posts/author', isAuthenticated, getAuthorPosts);
 
 module.exports = router;
 
