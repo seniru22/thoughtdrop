@@ -11,6 +11,13 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const Blog = () => {
   const router = useRouter();
+
+  const auth = typeof window !== "undefined" ? !!localStorage.getItem("token") : "";
+  if(!auth){
+    router.push("/login");
+    return;
+  }
+
   const [blogData, setBlogData] = useState({
     title: "",
     content: "",

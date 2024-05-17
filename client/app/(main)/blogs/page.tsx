@@ -3,10 +3,16 @@
 import api from "@/api/api";
 import BlogCard from "@/components/BlogCard";
 import { BlogData } from "@/type";
-import { useSearchParams } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const AuthorBlogs = () => {
+
+    const auth = typeof window !== "undefined" ? !!localStorage.getItem("token") : "";
+    if(!auth){
+        redirect("/login");
+    }
+
   const [blogsData, setBlogsData] = useState<BlogData[]>([]);
   const searchParams = useSearchParams();
   const authorId = searchParams.get("author");

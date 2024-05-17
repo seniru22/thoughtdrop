@@ -2,10 +2,17 @@ import BlogCard from "@/components/BlogCard";
 import { BlogData } from "@/type";
 import { cookies } from "next/headers";
 import { getBlogsData } from "@/lib/actions/blogs.action";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
   const cookieStore = cookies();
   const token: string | undefined = cookieStore.get("token")?.value;
+
+  if (!token) {
+    redirect("/login");
+    return;
+  }
+
   const blogsData: BlogData[] = await getBlogsData(token);
 
   return (

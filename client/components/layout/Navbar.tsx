@@ -18,6 +18,7 @@ import { usePathname, useRouter } from "next/navigation";
 import api from "@/api/api";
 import { toast } from "sonner";
 import { FaSearch } from "react-icons/fa";
+import { deleteCookie } from "cookies-next";
 
 const Navbar = () => {
   const router = useRouter();
@@ -30,13 +31,14 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const response = await api.post("/logout");
-      console.log(response);
       localStorage.removeItem("user");
       localStorage.removeItem("token");
+      
+      deleteCookie("token");
       toast.success(response.data.success);
       router.push("/login");
     } catch (err: any) {
-      toast.error(err.response.data.error);
+      toast.error(err.response.data.message);
       console.log("Error: ", err);
     }
   };
