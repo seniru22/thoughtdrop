@@ -84,13 +84,13 @@ To install and run this project locally, add the following commands in your term
 # Images
 
 ## Home page
-![Screenshot (343)](https://github.com/Shreekar11/Blog-Platform/assets/123613407/4147bc3a-39e6-4f26-bba4-88787216f3a8)
+![Screenshot (348)](https://github.com/Shreekar11/Blog-Platform/assets/123613407/a0ff6f32-b1a8-42ac-bb11-86edab02de4f)
 
 ## Dashboard
-![Screenshot (344)](https://github.com/Shreekar11/Blog-Platform/assets/123613407/f498e5c7-1622-4f95-be72-0cd714a63717)
+![Screenshot (349)](https://github.com/Shreekar11/Blog-Platform/assets/123613407/2d772e5c-2b38-4237-952e-78b7500ae60c)
 
 ## Search Author blogs
-![Screenshot (345)](https://github.com/Shreekar11/Blog-Platform/assets/123613407/410aba16-c4a5-4576-8108-33065b130256)
+![Screenshot (350)](https://github.com/Shreekar11/Blog-Platform/assets/123613407/bb6f9d2c-8280-4908-bf49-1f1c1e650370)
 
 ## Login page
 ![Screenshot (346)](https://github.com/Shreekar11/Blog-Platform/assets/123613407/3ca0da56-d481-446c-a858-f644863867f1)
