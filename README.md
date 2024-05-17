@@ -1,6 +1,6 @@
 ﻿# Blog Platform
 
-**Blog platform** is a personal platform where **users** can sign up, log in, and **post blogs**. The platform allow users to view all posts and filter them by author. 
+**Blog platform** is a personal platform where **users** can sign up, log in, and **post blogs**. The platform allow users to view all posts and filter/search them by author ID. 
 
 # Description
 
