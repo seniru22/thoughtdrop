@@ -2,8 +2,8 @@
 
 import BlogCard from "@/components/BlogCard";
 import { BlogData } from "@/type";
-import { redirect, useRouter } from "next/navigation";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { redirect } from "next/navigation";
+import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import api from "@/api/api";
 import { toast } from "sonner";
@@ -14,16 +14,18 @@ import { Textarea } from "@/components/ui/textarea";
 const Dashboard = () => {
   const auth =
     typeof window !== "undefined" ? !!localStorage.getItem("token") : "";
-  if (!auth) {
-    redirect("/login");
-    return;
-  }
 
   const [userBlogsData, setUserBlogsData] = useState<BlogData[]>([]);
   const [blogData, setBlogData] = useState({
     title: "",
     content: "",
   });
+
+  useEffect(() => {
+    if (!auth) {
+      redirect("/login");
+    }
+  }, [auth]);
 
   const getUserBlogs = async () => {
     try {

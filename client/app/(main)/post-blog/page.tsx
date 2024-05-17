@@ -2,7 +2,7 @@
 
 import api from "@/api/api";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { redirect, useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,18 +10,19 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 
 const Blog = () => {
-
   const auth =
     typeof window !== "undefined" ? !!localStorage.getItem("token") : "";
-  if (!auth) {
-    redirect("/login");
-    return;
-  }
 
   const [blogData, setBlogData] = useState({
     title: "",
     content: "",
   });
+
+  useEffect(() => {
+    if (!auth) {
+      redirect("/login");
+    }
+  }, [auth]);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
