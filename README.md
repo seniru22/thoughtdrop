@@ -4,7 +4,16 @@
 
 # Description
 
-In this platform **users** can **create** and view **blogs**. The platform also allows **users** to **filter** blogs by **author id**.The platform is majorly built in **TypeScript**. The frontend is built using **Next.js**, **Tailwind CSS** and **Shadcn**, where the **blogs** at the **homepage** and the **user dashboard** are retreived using **Server Side Rendering** using **Next.js** and the backend is built using **Node.js** and **Express**. The database used is **PostgreSQL**. Utitlised **JWT** for **authentication** and **authorization** also used **cookies** to store the **token** on server side.
+In this platform, **users** can **create** and view **blogs**. The platform also allows **users** to filter blogs by **author ID**. It is primarily built using **TypeScript**. The frontend is developed with **Next.js**, **Tailwind CSS** and **Shadcn**. The **backend** is built with **Node.js** and **Express**, and **PostgreSQL** is used as the **relational database**. **JWT** is utilized for **authentication** and **authorization**, and **cookies** are used to store the **token** on the **server side**.
+
+# Features
+
+1. **User Registration**: Users can sign up by providing their **username**, **email**, and **password**.
+2. **User Login**: Existing users can log in to their account using their **email** and **password**.
+3. **Data fetching**: Data is fetched on the **homepage** and **search author page** using **server-side rendering**.
+4. **Blog Viewing**: Users can view all blogs on the **homepage** and their **personal blogs** on **dashboard**.
+5. **Blog Filtering/Searching**: Users can **filter/search** blogs by **author ID**.
+6. **Protected Routes**: Only logged-in users can access the **homepage**, **dashboard** and **create blogs**.
 
 # View website
 
