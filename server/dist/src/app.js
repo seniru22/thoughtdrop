@@ -29,6 +29,8 @@ const app = (0, express_1.default)();
 const corsOptions = {
     origin: [
         "http://localhost:3000",
+        "https://blog-platform-zeta-five.vercel.app",
+        "https://blog-platform-at2g7koor-shreekar11s-projects.vercel.app",
     ],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
