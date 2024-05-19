@@ -44,6 +44,10 @@ const Navbar = () => {
   };
 
   const handleSearchClick = () => {
+    if(!search){
+      toast.error("Enter author id to search");
+      return;
+    }
     router.push(`/blogs?author=${search}`);
     setSearch("");
   };
