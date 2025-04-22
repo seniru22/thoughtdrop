@@ -18,7 +18,7 @@ const AuthorBlogs = ({
 
   return (
     <main className="mx-[2rem] lg:mx-[10rem]">
-      <AuthorData authorId={searchParams.author} token={token} />
+      <AuthorData searchText={searchParams.author} token={token} />
     </main>
   );
 };

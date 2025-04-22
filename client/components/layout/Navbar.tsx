@@ -44,7 +44,7 @@ const Navbar = () => {
   };
 
   const handleSearchClick = () => {
-    if(!search){
+    if (!search) {
       toast.error("Enter author id to search");
       return;
     }
@@ -59,12 +59,12 @@ const Navbar = () => {
           onClick={() => router.push("/")}
           className="hover:cursor-pointer text-[#4B6BFB] text-lg md:text-3xl font-semibold"
         >
-          BlogPlatform
+          тнσυgнт∂яσρ
         </div>
         <div className="relative hidden lg:flex">
           <input
             type="text"
-            placeholder="Search by author id"
+            placeholder="Search by Blog Title"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="pl-10 pr-3 py-2 placeholder:text-sm rounded-full border 
@@ -128,12 +128,12 @@ const Navbar = () => {
                   {user.user.email}
                 </div>
               </div>
-              <div className="flex justify-between items-center">
+              <div
+                className="flex justify-between items-center hover:cursor-pointer"
+                onClick={handleLogout}
+              >
                 <div className="">Logout</div>
-                <IoLogOutOutline
-                  onClick={handleLogout}
-                  className="h-6 w-6 text-red-500 hover:cursor-pointer"
-                />
+                <IoLogOutOutline className="h-6 w-6 text-red-500 " />
               </div>
             </div>
           </PopoverContent>
@@ -155,7 +155,7 @@ const Navbar = () => {
           <div className="relative">
             <input
               type="text"
-              placeholder="Search by author id"
+              placeholder="Search by Blog Title"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="pl-10 pr-3 py-2 rounded-full border 

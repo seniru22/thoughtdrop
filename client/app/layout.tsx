@@ -1,3 +1,5 @@
+// app/layout.tsx
+
 import "./globals.css";
 import { Toaster } from "sonner";
 import type { Metadata } from "next";
@@ -7,7 +9,7 @@ import { AuthProvider } from "@/context/Auth";
 const inter = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
-  title: "Blog Platform",
+  title: "ThoughtDrop",
   description: "Allow users to add blogs and view all blogs.",
 };
 

@@ -1,10 +1,14 @@
 import axios from "axios";
-import express, { Request, Response, Application, urlencoded } from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import express, { urlencoded } from "express";
+import cron from "node-cron";
+import { connectDB } from "../db/db.js";
 
-const cors = require("cors");
-const cron = require("node-cron");
+dotenv.config();
 
-const app: Application = express();
+const app = express();
+
 const corsOptions = {
   origin: [
     "http://localhost:3000",
@@ -15,41 +19,46 @@ const corsOptions = {
   credentials: true,
   optionsSuccessStatus: 204,
 };
+
 app.use(cors(corsOptions));
 app.use(urlencoded({ extended: true }));
 app.use(express.json());
 
-const userRoutes = require("../routes/user.routes");
-const blogRoutes = require("../routes/blog.routes");
+// ✅ Connect to MongoDB
+connectDB();
+
+// Routes
+import blogRoutes from "../routes/blog.routes.js";
+import userRoutes from "../routes/user.routes.js";
 
 app.use(userRoutes);
 app.use(blogRoutes);
 
 const port = process.env.PORT || 5000;
 
-app.get("/", async (req: Request, res: Response) => {
+app.get("/", async (req, res) => {
   res.send("Server running!");
 });
 
 app.listen(port, () => {
-  console.log(`Server running at ${port}`);
+  console.log(`🚀 Server running at http://localhost:${port}`);
 });
 
-// Added cron
-
+// Health check
 app.get("/ping", (req, res) => {
   res.status(200).json("pong....");
 });
 
+// Ping self to prevent render.com timeout
 const API_ENDPOINT = "https://blog-platform-vq3i.onrender.com";
 
 const makeApiRequest = async () => {
   try {
     const response = await axios.get(API_ENDPOINT);
     return response.data;
-  } catch (err: any) {
+  } catch (err) {
     console.error("API request failed:", err.message);
-    throw err;
+    throw new Error("API request failed");
   }
 };
 
@@ -58,7 +67,7 @@ const runApiRequestJob = async () => {
   try {
     const responseData = await makeApiRequest();
     return responseData;
-  } catch (error) {
+  } catch {
     return null;
   }
 };
@@ -66,7 +75,6 @@ const runApiRequestJob = async () => {
 cron.schedule("* * * * *", async () => {
   const responseData = await runApiRequestJob();
   if (responseData) {
-    // Process the response data here
     console.log("API request successful:", responseData);
   } else {
     console.log("API request failed");

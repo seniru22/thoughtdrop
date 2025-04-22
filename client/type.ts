@@ -20,14 +20,15 @@ export type UserCredential = {
 };
 
 export type BlogData = {
-  id: number;
+  _id: number;
   author_id: number;
   title: string;
   username: string;
   email: string;
   content: string;
-  created_at: string;
+  createdAt: string;
   updated_at: string;
+  author: string;
 };
 
 export type AuthContextType = {

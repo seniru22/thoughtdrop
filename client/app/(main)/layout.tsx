@@ -1,3 +1,5 @@
+// app/(main)/layout.tsx
+
 import "../globals.css";
 import { Poppins } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
@@ -10,13 +12,9 @@ export default function MainLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <main className="">
-          <Navbar />
-          <div className="h-screen">{children}</div>
-        </main>
-      </body>
-    </html>
+    <div className={inter.className}>
+      <Navbar />
+      <div className="h-screen">{children}</div>
+    </div>
   );
 }

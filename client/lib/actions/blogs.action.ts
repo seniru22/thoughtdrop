@@ -52,3 +52,19 @@ export const getAuthorBlogs = async ({
     return [];
   }
 };
+
+export const deleteBlog = async (blogId: string, token: string | undefined) => {
+  try {
+    // Add '/' before {blogId}
+    const response = await axios.delete(`${baseURL}/post/delete/${blogId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data.data;
+  } catch (err: any) {
+    console.log("Error: ", err);
+    return null;
+  }
+};
+

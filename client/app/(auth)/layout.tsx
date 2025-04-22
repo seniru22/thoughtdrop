@@ -1,3 +1,4 @@
+// app/(auth)/layout.tsx or wherever AuthLayout is
 import "../globals.css";
 import { Poppins } from "next/font/google";
 
@@ -8,11 +9,5 @@ export default function AuthLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={inter.className}>
-        <main className="">{children}</main>
-      </body>
-    </html>
-  );
+  return <main className={inter.className}>{children}</main>;
 }
